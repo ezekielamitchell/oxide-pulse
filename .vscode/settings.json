@@ -1,4 +1,4 @@
 {
     "idf.pythonInstallPath": "/Users/house/miniconda3/envs/creator/bin/python",
-    "idf.port": "/dev/tty.usbmodem11101"
+    "idf.port": "/dev/tty.usbserial-11201"
 }

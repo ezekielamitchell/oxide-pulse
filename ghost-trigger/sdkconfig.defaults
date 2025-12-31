@@ -1,0 +1,55 @@
+# ====================================================================================
+# ESP32 WROVER Configuration for Professional JTAG Debugging
+# ====================================================================================
+
+# --- Task Stack Configuration ---
+# Rust often needs a bit of an extra main task stack size compared to C (the default is 3K)
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8000
+
+# Use this to set FreeRTOS kernel tick frequency to 1000 Hz (100 Hz by default).
+# This allows to use 1 ms granularity for thread sleeps (10 ms by default).
+CONFIG_FREERTOS_HZ=1000
+
+# --- JTAG Debugging Configuration ---
+# Enable JTAG debugging interface (CRITICAL for hardware debugging)
+CONFIG_ESP32_DEBUG_OCDAWARE=y
+
+# Prevent watchdog timeouts during breakpoints
+CONFIG_ESP_TASK_WDT_EN=n
+CONFIG_ESP_INT_WDT_EN=n
+
+# Make the panic handler pause for debugger
+CONFIG_ESP_SYSTEM_PANIC_GDBSTUB=y
+
+# --- Optimization & Debug Symbols ---
+# Compiler optimization level for debugging (use -Og for optimal debug experience)
+CONFIG_COMPILER_OPTIMIZATION_DEBUG=y
+CONFIG_COMPILER_OPTIMIZATION_ASSERTIONS_ENABLE=y
+
+# Enable debug symbols in all components
+CONFIG_COMPILER_CXX_EXCEPTIONS=y
+CONFIG_COMPILER_STACK_CHECK_MODE_NORM=y
+
+# --- FreeRTOS Debug Features ---
+# Enable FreeRTOS debug features for better thread visibility
+CONFIG_FREERTOS_USE_TRACE_FACILITY=y
+CONFIG_FREERTOS_GENERATE_RUN_TIME_STATS=y
+CONFIG_FREERTOS_VTASKLIST_INCLUDE_COREID=y
+
+# --- Memory Debugging ---
+# Enable heap tracing for memory leak detection
+CONFIG_HEAP_TRACING_STANDALONE=y
+
+# --- Bootloader Configuration ---
+# Reduce bootloader log level to minimize noise
+CONFIG_BOOTLOADER_LOG_LEVEL_WARN=y
+
+# --- App Trace Configuration ---
+# Enable application tracing for advanced debugging
+CONFIG_APPTRACE_ENABLE=y
+CONFIG_APPTRACE_SV_ENABLE=y
+
+# --- Workarounds ---
+# Workaround for https://github.com/espressif/esp-idf/issues/7631
+#CONFIG_MBEDTLS_CERTIFICATE_BUNDLE=n
+#CONFIG_MBEDTLS_CERTIFICATE_BUNDLE_DEFAULT_FULL=n
